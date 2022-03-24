@@ -9,15 +9,22 @@ namespace tpmodul5_1302202072 // Note: actual namespace depends on the project n
         {
             
             
-            SayaTubeVideo vidio = new SayaTubeVideo("ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
+            SayaTubeVideo vidio = new SayaTubeVideo("Tutorial Design By Contract - Abdullah Razqy Aqil");
             vidio.PrintVideoDetails();
 
-            vidio.increasePlayCount(69);
+            vidio.IncreasePlayCount(69);
             vidio.PrintVideoDetails();
 
-            vidio.increasePlayCount(10000000000);
-            vidio.PrintVideoDetails();
-          
+            try
+            {
+                vidio.IncreasePlayCount(1900000000);
+                vidio.PrintVideoDetails();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
 
 
 

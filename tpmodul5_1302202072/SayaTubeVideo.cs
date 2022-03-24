@@ -1,63 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using System;
 using System.Diagnostics.Contracts;
-
 
 namespace tpmodul5_1302202072
 {
-    internal class SayaTubeVideo
-    {
-        private int id;
-        private string judul;
-        private int playCount;
+	public class SayaTubeVideo
+	{
+		private int id;
+		private string title;
+		private int playCount;
+		public SayaTubeVideo() { }
+		public SayaTubeVideo(string title)
+		{
+			Contract.Requires(this.title != null);
+			Contract.Requires(this.title.Length <= 100);
+			this.title = title;
 
-        public SayaTubeVideo(string judul)
-        {
+			var rand = new Random();
+			this.id = rand.Next(10000, 99999);
 
-            Contract.Requires<ArgumentNullException>(judul != null, "Parameter tidak boleg null");
-            Contract.Requires<ArgumentException>(judul.Length < 100, "Judul kepanjangan");
+			this.playCount = 0;
+		}
 
-            this.judul = judul;
+		public void IncreasePlayCount(int a)
+		{
+			Contract.Requires(a <= 1000000);
+			try
+			{
+				if (a > 10000000) throw new Exception("Jumlah input play count melebihi 10.000.000!");
+				this.playCount = checked(this.playCount + a);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
 
-            Random rnd = new Random();
-            this.id = rnd.Next(10000, 99999);
+		public void PrintVideoDetails()
+		{
+			Console.WriteLine("Video ID\t: {0}", this.id);
+			Console.WriteLine("Video Title\t: {0}", this.title);
+			Console.WriteLine("Video Playcount\t: {0}\n", this.playCount);
+		}
 
-            this.playCount = 0;
-        }
 
- 
-
-        public void increasePlayCount(int pc)
-        {
-            Contract.Requires(pc <= 1000000);
-            try
-            {
-                if (pc > 10000000)
-                {
-
-                    throw new Exception("Play Count Lebih dari 10.000.000!");
-                }
-                this.playCount = checked(this.playCount + pc);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-        public void PrintVideoDetails()
-        {
-
-            Console.WriteLine("ID\t\t: {0}", this.id);
-            Console.WriteLine("JUDUL\t\t: {0}", this.judul);
-            Console.WriteLine("PLAY COUNT\t: {0}\n", this.playCount);
-
-        }
-    }
-
+	}
 }
-
-
