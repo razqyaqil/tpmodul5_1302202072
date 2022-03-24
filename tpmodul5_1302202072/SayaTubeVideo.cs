@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Diagnostics.Contracts;
+
+
 namespace tpmodul5_1302202072
 {
     internal class SayaTubeVideo
@@ -14,31 +17,47 @@ namespace tpmodul5_1302202072
 
         public SayaTubeVideo(string judul)
         {
-            this.judul = judul;
-            Random rnd = new Random();
 
-            this.id = rnd.Next(10000,99999);
+            Contract.Requires<ArgumentNullException>(judul != null, "Parameter tidak boleg null");
+            Contract.Requires<ArgumentException>(judul.Length < 100, "Judul kepanjangan");
+
+            this.judul = judul;
+
+            Random rnd = new Random();
+            this.id = rnd.Next(10000, 99999);
+
             this.playCount = 0;
         }
 
+ 
+
         public void increasePlayCount(int pc)
         {
-            if(this.playCount == 0)
+            Contract.Requires(pc <= 1000000);
+            try
             {
-                this.playCount = pc;
+                if (pc > 10000000)
+                {
+
+                    throw new Exception("Play Count Lebih dari 10.000.000!");
+                }
+                this.playCount = checked(this.playCount + pc);
             }
-            else
+            catch (Exception e)
             {
-                this.playCount += pc;
+                Console.WriteLine(e.Message);
             }
-            
         }
-        public void printVideoDetails()
+        public void PrintVideoDetails()
         {
-            Console.WriteLine("ID\t\t: {0}",this.id);
-            Console.WriteLine("JUDUL\t\t: {0}",this.judul);
+
+            Console.WriteLine("ID\t\t: {0}", this.id);
+            Console.WriteLine("JUDUL\t\t: {0}", this.judul);
             Console.WriteLine("PLAY COUNT\t: {0}\n", this.playCount);
 
         }
     }
+
 }
+
+

@@ -7,14 +7,27 @@ namespace tpmodul5_1302202072 // Note: actual namespace depends on the project n
     {
         static void Main(string[] args)
         {
-            SayaTubeVideo vidio = new SayaTubeVideo("Tutorial Design By Contract – Abdullah Razqy Aqil");
-            vidio.printVideoDetails();
             
-            vidio.increasePlayCount(69);
-            vidio.printVideoDetails();
+            
+            SayaTubeVideo vidio = new SayaTubeVideo("ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
+            vidio.PrintVideoDetails();
 
             vidio.increasePlayCount(69);
-            vidio.printVideoDetails();
+            vidio.PrintVideoDetails();
+
+            vidio.increasePlayCount(10000000000);
+            vidio.PrintVideoDetails();
+          
+
+
+
+
+
+
+
+
+
+
 
         }
     }
